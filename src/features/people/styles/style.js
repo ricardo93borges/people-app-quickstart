@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
         flex:1,
         paddingVertical:20,        
         textAlign:"center"
+    },
+    content: {
+      flex:10
     }
   });
 

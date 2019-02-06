@@ -1,6 +1,6 @@
 const PROTOCOL = "http"
 const WS_PROTOCOL = "ws"
-const DOMAIN = "192.168.0.103:3000"
+const DOMAIN = "192.168.1.198:3000"
 
 module.exports = {
   API_URL: `${PROTOCOL}://${DOMAIN}`,

@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import { PropTypes } from "prop-types"
 import axios from "axios"
 import config from "../../../config/config"
-import { storePeople } from "../actions/index"
-import PeopleList from "../components/PeopleList"
+import styles from "../styles/style"
+import { storePerson } from "../actions/index"
+import AddPersonForm from "../components/AddPersonForm"
+import NavigationService from "../../../services/Navigation"
 
 class AddPeople extends Component {
   static navigationOptions = {
@@ -15,30 +17,42 @@ class AddPeople extends Component {
 
   constructor(props) {
     super(props)
-    //this.conversation = props.navigation.getParam("conversation", undefined)
+    this.myParam = props.navigation.getParam("myParam", undefined)
+    console.log(this.myParam)
+
+    this.state = {
+      showLoading: false
+    }
   }
 
-  componentDidMount = () => {
-    this.props.getMessages(this.conversation.id, this.conversation.type)    
+  addPerson = async (name, age, birth_at) => {
+    this.setState({showLoading:true})
+    await this.props.addPerson(name, age, birth_at)
+    this.setState({showLoading:false}, () => {
+      NavigationService.navigate("People")
+    })
   }
 
   render() {
     return (
-      <View>
-        <Text>Pleopi App</Text>
-        <PeopleList people={[]} />
+      <View style={styles.container}>
+        <Text style={styles.header}>ADD PERSON</Text>
+        <View style={styles.content}>
+          <AddPersonForm 
+            handleAddPerson={this.addPerson}
+            showLoading={this.state.showLoading} />
+        </View>
       </View>
     )
   }
 }
 
-const getPeople = async (dispatch) => {
-  dispatch(toggleLoading())
-  let url = ''
+const addPerson = async (dispatch, name, age, birth_at) => {
   return axios
-    .get(`${config.API_URL}/${url}`)
+    .post(`${config.API_URL}/people`, {name, age, birth_at})
     .then(response => {
-      dispatch(storePeople(response.data))
+      console.log(response.data)
+      dispatch(storePerson(response.data))      
     })
     .catch(err => {
       console.log(err.message)
@@ -46,11 +60,11 @@ const getPeople = async (dispatch) => {
 }
 
 const mapStateToProps = state => ({
-    people: state.people
+  people: state.people
 })
 
 const mapDispatchToProps = dispatch => ({
-    getPeople: () => getPeople(dispatch)  
+  addPerson: (name, age, birth_at) => addPerson(dispatch, name, age, birth_at)  
 })
 
 export default connect(

@@ -5,9 +5,10 @@ import PropTypes from "prop-types"
 
 const PersonCard = props => {
     return (
-      <View>
-          <Text>Name</Text>
-          <Text>Age</Text>
+      <View style={styles.card}>
+          <Text>{props.person.name}</Text>
+          <Text>{props.person.age}</Text>
+          <Text>{props.person.birth_at}</Text>
       </View>
     )
 }

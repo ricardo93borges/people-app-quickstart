@@ -1,1 +1,2 @@
 export const STORE_PEOPLE = 'STORE_PEOPLE'
+export const STORE_PERSON = 'STORE_PERSON'
