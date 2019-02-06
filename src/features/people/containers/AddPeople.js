@@ -51,7 +51,6 @@ const addPerson = async (dispatch, name, age, birth_at) => {
   return axios
     .post(`${config.API_URL}/people`, {name, age, birth_at})
     .then(response => {
-      console.log(response.data)
       dispatch(storePerson(response.data))      
     })
     .catch(err => {

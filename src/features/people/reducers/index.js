@@ -2,7 +2,7 @@ import {
     STORE_PEOPLE, STORE_PERSON,
   } from "../actions/actionsType"
   
-  const initialState = {
+  export const initialState = {
     people: []
   }
 
@@ -10,6 +10,7 @@ import {
     switch (action.type) {
       case STORE_PEOPLE: {
         return {
+          ...state,
           people: action.people
         }
       }
@@ -18,6 +19,7 @@ import {
         let people = state.people.slice()
         people.push(action.person)
         return {
+          ...state,
           people: people
         }
       }

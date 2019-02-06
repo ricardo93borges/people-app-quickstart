@@ -7,12 +7,13 @@ import PersonCard from "../components/PersonCard"
 export default class PeopleList extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      refreshing: false
-    }
   }
 
   _keyExtractor = item => `key${item.id}`
+
+  handleRefresh = () => {
+    this.props.getPeople('')
+  }
 
   render() {
     return (
@@ -21,7 +22,8 @@ export default class PeopleList extends Component {
           keyExtractor={this._keyExtractor}
           data={this.props.people}
           renderItem={({ item }) => <PersonCard person={item} />}
-          refreshing={this.state.refreshing}
+          refreshing={false}
+          onRefresh={this.handleRefresh}
           ref={scrollview => (this.scrollview = scrollview)}
         />
       </View>
@@ -31,5 +33,6 @@ export default class PeopleList extends Component {
 
 PeopleList.propTypes = {
   people: PropTypes.array,
+  getPeople: PropTypes.func
   
 }

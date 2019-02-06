@@ -38,7 +38,7 @@ class People extends Component {
             title="Add Person"
             color="#841584"
           />
-          <PeopleList people={this.props.people} />
+          <PeopleList people={this.props.people} getPeople={this.props.getPeople} />
         </View>
       </View>
     )
@@ -49,6 +49,7 @@ const getPeople = async (dispatch) => {
   return axios
     .get(`${config.API_URL}/people`)
     .then(response => {
+      console.log(response.data)
       dispatch(storePeople(response.data))
     })
     .catch(err => {
