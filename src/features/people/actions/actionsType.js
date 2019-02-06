@@ -1,5 +1,1 @@
-export const SHOW_PERSON = 'SHOW_PERSON'
-export const LIST_PEOPLE = 'LIST_PEOPLE'
-export const CREATE_PERSON = 'CREATE_PERSON'
-export const UPDATE_PERSON = 'UPDATE_PERSON'
-export const DESTROY_PERSON = 'DESTROY_PERSON'
+export const STORE_PEOPLE = 'STORE_PEOPLE'

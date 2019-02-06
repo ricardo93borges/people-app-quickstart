@@ -1,10 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import { PropTypes } from "prop-types"
 import axios from "axios"
 import config from "../../../config/config"
 import { storePeople } from "../actions/index"
+import styles from "../styles/style"
+import PeopleList from "../components/PeopleList"
 
 class People extends Component {
   static navigationOptions = {
@@ -14,27 +16,26 @@ class People extends Component {
 
   constructor(props) {
     super(props)
-    //this.conversation = props.navigation.getParam("conversation", undefined)
+    //this.people = props.navigation.getParam("conversation", undefined)
   }
 
   componentDidMount = () => {
-    this.props.getMessages(this.conversation.id, this.conversation.type)    
+    this.props.getPeople()
   }
 
   render() {
     return (
-      <View style={this.state.containerStyle}>
-        
+      <View style={styles.container}>
+        <Text style={styles.header}>Pleopi App</Text>
+        <PeopleList people={this.props.people} />
       </View>
     )
   }
 }
 
 const getPeople = async (dispatch) => {
-  dispatch(toggleLoading())
-  let url = ''
   return axios
-    .get(`${config.API_URL}/${url}`)
+    .get(`${config.API_URL}/people`)
     .then(response => {
       dispatch(storePeople(response.data))
     })
@@ -44,7 +45,7 @@ const getPeople = async (dispatch) => {
 }
 
 const mapStateToProps = state => ({
-    people: state.people
+    people: state.people.people
 })
 
 const mapDispatchToProps = dispatch => ({

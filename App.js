@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 import { initStore } from "./redux/store"
 import { Provider } from "react-redux"
 import NavigationService from "./src/services/Navigation"
-import AppStackNavigator from "./src/components/menu/menu"
+import AppContainer from "./src/components/menu/menu"
 
 const store = initStore()
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppStackNavigator
+        <AppContainer
           ref={navigatorRef => {
             NavigationService.setTopLevelNavigator(navigatorRef)
           }}
