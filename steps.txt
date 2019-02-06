@@ -1,0 +1,5 @@
+1- people reducer
+2- add people reducer to combine reducers
+3- people reducer test
+4- create people containers
+5- create people routers

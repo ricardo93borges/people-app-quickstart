@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native'
 import { initStore } from "./redux/store"
 import { Provider } from "react-redux"
 import NavigationService from "./src/services/Navigation"
@@ -20,12 +19,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
